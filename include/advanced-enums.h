@@ -31,6 +31,10 @@
 #include <compare>
 #include <format>
 
+#ifndef ENUM_ENCRYPTION_STRING
+#define ENUM_ENCRYPTION_STRING(x) x
+#endif
+
 #define ENUM_DEFINE_ENUM_EXPAND(enum_member_name) enum_member_name,
 
 #define ENUM_DEFINE_ENUM_IS(enum_member_name)     \
@@ -38,9 +42,9 @@
 	return value_ == (enum_member_name);          \
 } 
 
-#define ENUM_DEFINE_ENUM_CASE(enum_member_name) \
-case enum_member_name: {                        \
-	return #enum_member_name;                   \
+#define ENUM_DEFINE_ENUM_CASE(enum_member_name)       \
+case enum_member_name: {                              \
+	return ENUM_ENCRYPTION_STRING(#enum_member_name); \
 }
 
 #define DEFINE_ENUM(enum_name, ...)                               \

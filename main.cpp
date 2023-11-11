@@ -4,9 +4,13 @@
 
 DEFINE_ENUM(Status, Fail, Success, Exception);
 
+Status Foo() {
+  return Status::Success;
+}
+
 void Example() {
+  const Status status2 = Foo();
   const Status status1 = Status::Fail;
-  const Status status2 = Status::Success;
 
   if (status1 == Status::Success); // false
   if (status1 != Status::Success); // true
