@@ -6,4 +6,4 @@ set(CMAKE_CXX_STANDARD 23)
 add_executable(advanced_enum 
         main.cpp
         include/macro-hell.inc
-        include/enum.h)
+        include/advanced-enums.h)

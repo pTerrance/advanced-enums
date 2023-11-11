@@ -35,12 +35,12 @@
 
 #define ENUM_DEFINE_ENUM_IS(enum_member_name)     \
 [[nodiscard]] bool Is##enum_member_name() const { \
-	return value_ == (enum_member_name);            \
+	return value_ == (enum_member_name);          \
 } 
 
 #define ENUM_DEFINE_ENUM_CASE(enum_member_name) \
 case enum_member_name: {                        \
-	return #enum_member_name;                     \
+	return #enum_member_name;                   \
 }
 
 #define DEFINE_ENUM(enum_name, ...)                               \
@@ -56,24 +56,25 @@ class enum_name {                                                 \
   enum_name(const EnumType &value) : value_(value) {}             \
   constexpr auto operator<=>(const enum_name &) const = default;  \
   enum_name &operator=(const EnumType &value) {                   \
-	  value_ = value;                                               \
-	  return *this;                                                 \
+	  value_ = value;                                             \
+	  return *this;                                               \
   }                                                               \
   ENUM_EXPAND(ENUM_PASTE(ENUM_DEFINE_ENUM_IS, __VA_ARGS__))       \
   [[nodiscard]] std::string ToString() const {                    \
-	  switch (value_) {                                             \
-	    ENUM_EXPAND(ENUM_PASTE(ENUM_DEFINE_ENUM_CASE, __VA_ARGS__)) \
-	  }                                                             \
+    switch (value_) {                                             \
+	  ENUM_EXPAND(ENUM_PASTE(ENUM_DEFINE_ENUM_CASE, __VA_ARGS__)) \
+	}                                                             \
+    return "Err";                                                 \
   }                                                               \
  private:                                                         \
   EnumType value_;                                                \
 };                                                                \
-																																	\
+                                                                  \
 template <>                                                       \
 struct std::formatter<enum_name> : std::formatter<std::string> {  \
   auto format(const enum_name e, format_context& ctx) const {     \
     return formatter<string>::format(                             \
-			std::format("{}", e.ToString()), ctx);                      \
+			std::format("{}", e.ToString()), ctx);                \
   }                                                               \
 }
 
