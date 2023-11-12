@@ -39,12 +39,12 @@
 
 #define ENUM_DEFINE_ENUM_IS(enum_member_name)     \
 [[nodiscard]] bool Is##enum_member_name() const { \
-	return value_ == (enum_member_name);          \
+  return value_ == (enum_member_name);            \
 } 
 
-#define ENUM_DEFINE_ENUM_CASE(enum_member_name)       \
-case enum_member_name: {                              \
-	return ENUM_ENCRYPTION_STRING(#enum_member_name); \
+#define ENUM_DEFINE_ENUM_CASE(enum_member_name)     \
+case enum_member_name: {                            \
+  return ENUM_ENCRYPTION_STRING(#enum_member_name); \
 }
 
 #define DEFINE_ENUM(enum_name, ...)                               \
@@ -68,7 +68,7 @@ class enum_name {                                                 \
     switch (value_) {                                             \
 	  ENUM_EXPAND(ENUM_PASTE(ENUM_DEFINE_ENUM_CASE, __VA_ARGS__)) \
 	}                                                             \
-    return "Err";                                                 \
+    return ENUM_ENCRYPTION_STRING("Err");                         \
   }                                                               \
  private:                                                         \
   EnumType value_;                                                \
