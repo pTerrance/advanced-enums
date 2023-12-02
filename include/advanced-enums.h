@@ -60,25 +60,28 @@ class enum_name {                                                 \
   enum_name(const EnumType &value) : value_(value) {}             \
   constexpr auto operator<=>(const enum_name &) const = default;  \
   enum_name &operator=(const EnumType &value) {                   \
-	  value_ = value;                                             \
-	  return *this;                                               \
+	  value_ = value;                                         \
+	  return *this;                                           \
   }                                                               \
   ENUM_EXPAND(ENUM_PASTE(ENUM_DEFINE_ENUM_IS, __VA_ARGS__))       \
   [[nodiscard]] std::string ToString() const {                    \
     switch (value_) {                                             \
-	  ENUM_EXPAND(ENUM_PASTE(ENUM_DEFINE_ENUM_CASE, __VA_ARGS__)) \
-	}                                                             \
+      ENUM_EXPAND(ENUM_PASTE(ENUM_DEFINE_ENUM_CASE, __VA_ARGS__)) \
+    }                                                             \
     return ENUM_ENCRYPTION_STRING("Err");                         \
   }                                                               \
  private:                                                         \
   EnumType value_;                                                \
 };                                                                \
+
+#define DEFINE_ENUM_WITH_FORMATTER(enum_name, ...)                \
+DEFINE_ENUM(enum_name, __VA_ARGS__)				  \
                                                                   \
 template <>                                                       \
 struct std::formatter<enum_name> : std::formatter<std::string> {  \
   auto format(const enum_name e, format_context& ctx) const {     \
     return formatter<string>::format(                             \
-			std::format("{}", e.ToString()), ctx);                \
+			std::format("{}", e.ToString()), ctx);    \
   }                                                               \
 }
 
