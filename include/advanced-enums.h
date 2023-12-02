@@ -68,7 +68,7 @@ class enum_name {                                                 \
     switch (value_) {                                             \
       ENUM_EXPAND(ENUM_PASTE(ENUM_DEFINE_ENUM_CASE, __VA_ARGS__)) \
     }                                                             \
-    return ENUM_ENCRYPTION_STRING("Err");                         \
+    return ENUM_ENCRYPTION_STRING("[[UNKNOWN VALUE]]");           \
   }                                                               \
  private:                                                         \
   EnumType value_;                                                \
