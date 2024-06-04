@@ -70,6 +70,7 @@ class enum_name {                                                 \
     }                                                             \
     return ENUM_ENCRYPTION_STRING("[[UNKNOWN VALUE]]");           \
   }                                                               \
+  EnumType operator()() const { return value_; }                  \
  private:                                                         \
   EnumType value_;                                                \
 };                                                                \
