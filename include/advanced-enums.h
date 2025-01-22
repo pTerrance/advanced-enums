@@ -50,7 +50,7 @@ case enum_member_name: {                            \
 #define DEFINE_ENUM(enum_name, ...)                               \
 class enum_name {                                                 \
  public:                                                          \
-  enum {                                                          \
+  enum : uint8_t {                                                          \
     ENUM_EXPAND(ENUM_PASTE(ENUM_DEFINE_ENUM_EXPAND, __VA_ARGS__)) \
   };                                                              \
  private:                                                         \
